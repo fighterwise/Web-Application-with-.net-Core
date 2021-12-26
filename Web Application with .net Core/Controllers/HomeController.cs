@@ -11,15 +11,19 @@ namespace Web_Application_with_.net_Core.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly GraphServiceClient _graphServiceClient;
+          private readonly ILogger<HomeController> _logger;
+        //private readonly GraphServiceClient _graphServiceClient;
 
-        public HomeController(ILogger<HomeController> logger, GraphServiceClient graphServiceClient) // 
+   //     public HomeController(ILogger<HomeController> logger, GraphServiceClient graphServiceClient) // 
+     //   {
+      //      _logger = logger;
+         //   _graphServiceClient = graphServiceClient;
+       // }
+
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _graphServiceClient = graphServiceClient;
         }
-
 
         public IActionResult Index()
         {

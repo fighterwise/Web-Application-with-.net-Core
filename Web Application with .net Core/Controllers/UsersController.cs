@@ -31,8 +31,8 @@ namespace Web_Application_with_.net_Core.Controllers
                 .GetAsync();              //Groups
 
             var user = await _graphServiceClient.Users                                       // Users
-                .Request()
-                .GetAsync();
+            .Request()
+            .GetAsync();
 
             //List<string> DisplayName = new List<string>();
             //List<string> Mail = new List<string>();
@@ -40,20 +40,34 @@ namespace Web_Application_with_.net_Core.Controllers
             //List<string> CompanyName = new List<string>();
 
 
-            var userModel = new Models.User();
+            var usersList = new List<Models.User>();
 
-            
+
             foreach (var item in user)                                               // Username.Mail.Department,CompaNyname
             {
+                var joinedTeams = "";
+                if (item.JoinedTeams != null)
+                {
+                    foreach (var team in item.JoinedTeams)
+                    {
+                        joinedTeams += $"{team.DisplayName}\n";
+                    }
+                }
 
-                userModel.Mail = item.Mail ?? "";
-                userModel.Name = item.DisplayName ?? "";
-                userModel.Department = item.Department ?? "";
-                userModel.CompanyName = item.CompanyName ?? "";
-                
+                var userModel = new Models.User()
+                {
+                    Mail = item.Mail ?? "",
+                    Name = item.DisplayName ?? "",
+                    Department = item.Department ?? "",
+                    CompanyName = item.CompanyName ?? "",
+                    TeamgroupName = joinedTeams
+                };
 
 
-                           //await _userWriteRepository.Add(usermodel);
+
+                usersList.Add(userModel);
+
+                //await _userWriteRepository.Add(usermodel);
 
                 //DisplayName.Add(item.DisplayName);
                 //Mail.Add(item.Mail);
@@ -78,27 +92,28 @@ namespace Web_Application_with_.net_Core.Controllers
             }
 
 
-           // List<string> groupNames = new List<string>();
+            // List<string> groupNames = new List<string>();
 
-            if (groups != null)
-            {
-                foreach (var item in groups)                                           // Team.groupName
-                {
+            //if (groups != null)
+            //{
+            //    foreach (var item in groups)                                           // Team.groupName
+            //    {
 
-                    if (item.Team != null)
-                    {
+            //        if (item.Team != null)
+            //        {
 
-                        userModel.TeamgroupName = item.Team.DisplayName ?? "";
+            //            userModel.TeamgroupName = item.Team.DisplayName.ToString() ?? "";
 
-                       // groupNames.Add(item.Team.DisplayName);
-                        //Models.User user2 = new Models.User { TeamgroupName = item.Team.DisplayName.ToString() };
-                        
-                    }
+            //           // groupNames.Add(item.Team.DisplayName);
+            //            //Models.User user2 = new Models.User { TeamgroupName = item.Team.DisplayName.ToString() };
 
-                }
-                // }
-            }
-            return View();
+            //        }
+
+            //    }
+            //    // }
+            //}
+
+            return View(usersList);
         }
     }
 }
