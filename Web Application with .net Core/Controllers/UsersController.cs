@@ -59,6 +59,7 @@ namespace Web_Application_with_.net_Core.Controllers
                     CompanyName = item.CompanyName ?? ""
                 };
 
+
                 //ViewData["users2"] = user2;
             }
 
