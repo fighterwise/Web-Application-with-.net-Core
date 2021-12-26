@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Graph;
-using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using Web_Application_with_.net_Core.Models;
 
@@ -25,7 +25,6 @@ namespace Web_Application_with_.net_Core.Controllers
         {
             return View();
         }
-        
 
         public IActionResult Privacy()
         {
