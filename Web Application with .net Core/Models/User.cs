@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Web_Application_with_.net_Core.Models
 {
-    public class Users
+    public class User
     {                                                                              // Username.Mail.Department,CompaNyname
         public string Name { get; set; }
         public string Mail { get; set; }

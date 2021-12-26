@@ -33,38 +33,52 @@ namespace Web_Application_with_.net_Core.Controllers
             var user = await _graphServiceClient.Users                                       // Users
                 .Request()
                 .GetAsync();
-            
-            List<string> DisplayName = new List<string>();
-            List<string> Mail = new List<string>();
-            List<string> Departament = new List<string>();
-            List<string> CompanyName = new List<string>();
 
+            //List<string> DisplayName = new List<string>();
+            //List<string> Mail = new List<string>();
+            //List<string> Departament = new List<string>();
+            //List<string> CompanyName = new List<string>();
+
+
+            var userModel = new Models.User();
+
+            
             foreach (var item in user)                                               // Username.Mail.Department,CompaNyname
             {
-                DisplayName.Add(item.DisplayName);
-                Mail.Add(item.Mail);
-                Departament.Add(item.Department);
-                CompanyName.Add(item.CompanyName);
+
+                userModel.Mail = item.Mail ?? "";
+                userModel.Name = item.DisplayName ?? "";
+                userModel.Department = item.Department ?? "";
+                userModel.CompanyName = item.CompanyName ?? "";
+                
+
+
+                           //await _userWriteRepository.Add(usermodel);
+
+                //DisplayName.Add(item.DisplayName);
+                //Mail.Add(item.Mail);
+                //Departament.Add(item.Department);
+                //CompanyName.Add(item.CompanyName);
 
                 //if (item.DisplayName  != null && item.Mail != null && item.Department != null && item.CompanyName != null)
                 //{
                 //}
                 //Users user1 = new Users(item.DisplayName.ToString(), item.Mail.ToString(), item.Department.ToString(), item.CompanyName.ToString());
 
-                Users user2 = new Users()
-                {
-                    Name = item.DisplayName ?? "",
-                    Mail = item.Mail ?? "",
-                    Department = item.Department ?? "",
-                    CompanyName = item.CompanyName ?? ""
-                };
+                //Models.User user2 = new Models.User()
+                //{
+                //    Name = item.DisplayName ?? "",
+                //    Mail = item.Mail ?? "",
+                //    Department = item.Department ?? "",
+                //    CompanyName = item.CompanyName ?? ""
+                //};
 
 
                 //ViewData["users2"] = user2;
             }
 
 
-            List<string> groupNames = new List<string>();
+           // List<string> groupNames = new List<string>();
 
             if (groups != null)
             {
@@ -73,8 +87,11 @@ namespace Web_Application_with_.net_Core.Controllers
 
                     if (item.Team != null)
                     {
-                        groupNames.Add(item.Team.DisplayName);
-                        Users user2 = new Users { TeamgroupName = item.Team.DisplayName.ToString() };
+
+                        userModel.TeamgroupName = item.Team.DisplayName ?? "";
+
+                       // groupNames.Add(item.Team.DisplayName);
+                        //Models.User user2 = new Models.User { TeamgroupName = item.Team.DisplayName.ToString() };
                         
                     }
 
